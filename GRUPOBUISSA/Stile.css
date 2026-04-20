@@ -1,0 +1,79 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  background-color: #F5F5F0;
+  color: #2C3E50;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #136699;
+  padding: 10px 20px;
+}
+.logo { height: 50px; }
+.menu { list-style: none; display: flex; gap: 15px; }
+.menu li a { color: white; text-decoration: none; font-weight: bold; }
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+  background-color: #3A8B3A;
+  color: white;
+}
+.hero h1 { margin: 0; font-size: 2em; }
+
+/* Secciones */
+.section { padding: 40px 20px; }
+.grid { display: flex; flex-wrap: wrap; gap: 20px; }
+.card {
+  flex: 1 1 calc(50% - 20px);
+  background: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Cotización */
+.cotizacion form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+.cotizacion input, .cotizacion select, .cotizacion textarea {
+  padding: 10px; border: 1px solid #ccc; border-radius: 5px;
+}
+.cotizacion button {
+  background-color: #136699;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.cotizacion button:hover { background-color: #3A8B3A; }
+
+/* Footer */
+footer {
+  background-color: #6F6F6F;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+footer .social a { color: white; margin: 0 5px; text-decoration: none; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid { flex-direction: column; }
+  .menu { flex-direction: column; gap: 10px; }
+}
