@@ -1,87 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grupo Buissa | Soluciones Industriales y Agro</title>
+  <title>Grupo Buissa | Inicio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <img src="assets/logo.png" alt="Logo Grupo Buissa" class="logo">
+
+  <!-- Encabezado con logo -->
+  <header class="header">
+    <img src="assets/logo1.png" alt="Logo Grupo Buissa" class="logo">
+    <nav>
       <ul class="menu">
-        <li><a href="#productos">Productos</a></li>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#cotizacion">Cotización</a></li>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="cotizacion.html">Cotización</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
-    <div class="hero">
-      <h1>Resistencia y confianza en cada entrega</h1>
-      <p>Industria • Agro • Empaque</p>
-    </div>
   </header>
 
-  <section id="productos" class="section">
-    <h2>Nuestros Productos</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Cartón de Embalaje</h3>
-        <p>1,20m x 100m — mínimo 5 UND</p>
-      </div>
-      <div class="card">
-        <h3>Sogas en Polipropileno</h3>
-        <p>Ganadera Mix — mínimo 5 UND</p>
-      </div>
+  <!-- Banner 1 -->
+  <section class="banner">
+    <img src="assets/banner-aliado.png" alt="Tu aliado en cada decisión" class="banner-img">
+    <div class="banner-text">
+      <h1>Tu aliado en cada decisión</h1>
+      <p>Confianza y cercanía para tu negocio</p>
+      <a href="cotizacion.html" class="btn">Solicita tu cotización</a>
     </div>
   </section>
 
-  <section id="servicios" class="section">
-    <h2>Servicios Digitales</h2>
-    <p>Asistentes virtuales, redacción y mercadeo para empresas agroindustriales.</p>
-  </section>
-
-  <section id="cotizacion" class="section cotizacion">
-    <h2>Formulario de Cotización</h2>
-    <form action="https://formspree.io/f/tu_endpoint" method="POST">
-      <label for="nombre">Nombre</label>
-      <input type="text" id="nombre" name="nombre" required>
-
-      <label for="correo">Correo electrónico</label>
-      <input type="email" id="correo" name="correo" required>
-
-      <label for="producto">Producto</label>
-      <select id="producto" name="producto" required>
-        <option value="">Seleccione...</option>
-        <option value="carton">Cartón de Embalaje (1,20m x 100m)</option>
-        <option value="sogas">Sogas en Polipropileno (Ganadera Mix)</option>
-      </select>
-
-      <label for="cantidad">Cantidad (mínimo 5 UND)</label>
-      <input type="number" id="cantidad" name="cantidad" min="5" required>
-
-      <label for="mensaje">Mensaje adicional</label>
-      <textarea id="mensaje" name="mensaje"></textarea>
-
-      <input type="hidden" name="_next" value="https://tu-dominio.github.io/grupo-buissa/gracias.html">
-
-      <button type="submit">Solicitar Cotización</button>
-    </form>
-  </section>
-
-  <section id="contacto" class="section contacto">
-    <h2>Contáctanos</h2>
-    <p>Correo: contacto@grupobuissa.com</p>
-    <p>Teléfono: +57 300 000 0000</p>
-  </section>
-
-  <footer>
-    <p>© 2026 Grupo Buissa | Industria • Agro • Empaque</p>
-    <div class="social">
-      <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">LinkedIn</a>
+  <!-- Banner 2 -->
+  <section class="banner">
+    <img src="assets/banner-soluciones.png" alt="Soluciones a tu medida" class="banner-img">
+    <div class="banner-text">
+      <h1>Soluciones a tu medida</h1>
+      <p>Nos adaptamos a tus necesidades</p>
+      <a href="cotizacion.html" class="btn">Habla con un asesor</a>
     </div>
+  </section>
+
+  <!-- Banner 3 -->
+  <section class="banner">
+    <img src="assets/banner.png" alt="Asesoría y confianza" class="banner-img">
+    <div class="banner-text">
+      <h1>Asesoría y confianza</h1>
+      <p>Apoyo y compromiso en cada paso</p>
+      <a href="cotizacion.html" class="btn">Solicita tu consulta</a>
+    </div>
+  </section>
+
+  <!-- Pie de página -->
+  <footer class="footer" id="contacto">
+    <p>© 2026 Grupo Buissa | Asesoría y Soluciones a tu Medida</p>
   </footer>
+
 </body>
 </html>
