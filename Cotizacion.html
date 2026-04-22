@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupo Buissa | Cotización</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Encabezado -->
+  <header class="header">
+    <img src="assets/logo-asesoria.png" alt="Logo Grupo Buissa" class="logo">
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="cotizacion.html">Cotización</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Formulario dinámico de cotización -->
+  <section class="cotizacion">
+    <h2>Solicita tu cotización</h2>
+    <form id="dynamicForm">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+
+      <label for="email">Correo:</label>
+      <input type="email" id="email" name="email" required>
+
+      <!-- Contenedor dinámico de productos -->
+      <div id="productosContainer">
+        <div class="producto">
+          <label>Producto:</label>
+          <select name="producto[]">
+            <option value="">Seleccione...</option>
+            <option value="Cartón de embalaje (1,20m x 100m)">Cartón de embalaje</option>
+            <option value="Sogas en polipropileno (Ganadera Mix)">Sogas en polipropileno</option>
+            <option value="Guantes industriales">Guantes industriales</option>
+            <option value="Plásticos y empaques">Plásticos y empaques</option>
+            <option value="Otros">Otros</option>
+          </select>
+          <input type="number" name="cantidad[]" placeholder="Cantidad" min="1">
+        </div>
+      </div>
+
+      <!-- Botón para agregar más productos -->
+      <button type="button" id="addProduct" class="btn">➕ Agregar otro producto</button>
+
+      <label for="fecha">Fecha de entrega deseada:</label>
+      <input type="date" id="fecha" name="fecha" required>
+
+      <label for="mensaje">Detalles adicionales:</label>
+      <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+
+      <button type="submit" class="btn">📲 Enviar cotización por WhatsApp</button>
+    </form>
+  </section>
+
+  <!-- Script -->
+  <script>
+    // Botón para agregar productos dinámicamente
+    document.getElementById("addProduct").addEventListener("click", function(){
+      var container = document.getElementById("productosContainer");
+      var div = document.createElement("div");
+      div.classList.add("producto");
+      div.innerHTML = `
+        <label>Producto:</label>
+        <select name="producto[]">
+          <option value="">Seleccione...</option>
+          <option value="Cartón de embalaje (1,20m x 100m)">Cartón de embalaje</option>
+          <option value="Sogas en polipropileno (Ganadera Mix)">Sogas en polipropileno</option>
+          <option value="Guantes industriales">Guantes industriales</option>
+          <option value="Plásticos y empaques">Plásticos y empaques</option>
+          <option value="Otros">Otros</option>
+        </select>
+        <input type="number" name="cantidad[]" placeholder="Cantidad" min="1">
+      `;
+      container.appendChild(div);
+    });
+
+    // Envío a WhatsApp
+    document.getElementById("dynamicForm").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      var telefono = "573001234567"; // Reemplaza con tu número
+      var nombre = document.getElementById("nombre").value;
+      var email = document.getElementById("email").value;
+      var fecha = document.getElementById("fecha").value;
+      var mensaje = document.getElementById("mensaje").value;
+
+      // Captura de productos dinámicos
+      var productos = "";
+      var productoElems = document.getElementsByName("producto[]");
+      var cantidadElems = document.getElementsByName("cantidad[]");
+
+      for (var i = 0; i < productoElems.length; i++) {
+        var prod = productoElems[i].value;
+        var cant = cantidadElems[i].value;
+        if (prod && cant) {
+          productos += "\n- " + prod + " (Cantidad: " + cant + ")";
+        }
+      }
+
+      var texto = "Hola Grupo Buissa, soy " + nombre +
+                  ". Mi correo es " + email +
+                  ". Quiero cotizar los siguientes productos:" + productos +
+                  ". Fecha de entrega: " + fecha +
+                  ". Detalles: " + mensaje;
+
+      var url = "https://wa.me/" + telefono + "?text=" + encodeURIComponent(texto);
+      window.open(url, "_blank");
+    });
+  </script>
+
+  <!-- Pie de página -->
+  <footer class="footer" id="contacto">
+    <p>© 2026 Grupo Buissa | Asesoría y Soluciones a tu Medida</p>
+  </footer>
+
+</body>
+</html>
