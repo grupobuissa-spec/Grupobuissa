@@ -2,53 +2,76 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grupo Buissa | Inicio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Grupo Buissa | Suministros Industriales y Embalajes</title>
+    <meta name="description" content="Venta de cartón de embalaje, sogas de polipropileno y guantes industriales. Calidad garantizada en Cali.">
     <link rel="stylesheet" href="Stile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <header class="main-header">
-    <div class="container">
-        <img src="assets/logo.png" alt="Logo" class="logo">
-        <nav>
-            <ul class="menu">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="Cotizacion.html">Cotización</a></li>
+    <div class="nav-container">
+        <a href="index.html" class="logo-box">
+            <img src="assets/logo.png" alt="Grupo Buissa Logo" class="logo-img">
+        </a>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="Cotizacion.html">Productos</a></li>
+                <li><a href="Cotizacion.html" class="btn-nav">Cotizar WhatsApp</a></li>
             </ul>
         </nav>
     </div>
 </header>
 
 <main>
-    <section class="slider-container">
-        <div class="slider-track" id="sliderTrack">
-            <div class="banner">
-                <img src="assets/banner-aliado.png" class="banner-img">
-                <div class="banner-content">
-                    <h1>Tu aliado estratégico</h1>
-                    <p>Confianza y cercanía para tu negocio.</p>
+    <section class="hero-slider" aria-label="Productos destacados">
+        <div class="slider-wrapper" id="sliderTrack">
+            <div class="slide">
+                <img src="assets/banner-aliado.png" alt="Cartón de embalaje industrial" class="slide-img">
+                <div class="slide-overlay">
+                    <div class="slide-text">
+                        <h1>Cartón y Embalajes de Alta Resistencia</h1>
+                        <p>Protege tu mercancía con materiales de primera calidad.</p>
+                        <a href="Cotizacion.html" class="cta-button">Ver Catálogo</a>
+                    </div>
                 </div>
             </div>
-            <div class="banner">
-                <img src="assets/banner-soluciones.png" class="banner-img">
-                <div class="banner-content">
-                    <h1>Soluciones a tu medida</h1>
-                    <p>Innovación constante en logística.</p>
+            <div class="slide">
+                <img src="assets/banner-soluciones.png" alt="Sogas y suministros" class="slide-img">
+                <div class="slide-overlay">
+                    <div class="slide-text">
+                        <h1>Sogas y Guantes Industriales</h1>
+                        <p>Suministros certificados para trabajos pesados.</p>
+                        <a href="Cotizacion.html" class="cta-button">Solicitar Precios</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <button class="slider-control prev" id="prevBtn">❮</button>
-        <button class="slider-control next" id="nextBtn">❯</button>
+        
+        <button class="arrow prev" id="prevBtn" aria-label="Anterior">❮</button>
+        <button class="arrow next" id="nextBtn" aria-label="Siguiente">❯</button>
     </section>
 
-    <div style="height: 500px; display: flex; align-items: center; justify-content: center;">
-        <h2>Bienvenidos a Grupo Buissa</h2>
-    </div>
+    <section class="quick-info container">
+        <div class="info-card">
+            <h3>Envío Rápido</h3>
+            <p>Entregas programadas en Cali y alrededores.</p>
+        </div>
+        <div class="info-card">
+            <h3>Calidad Certificada</h3>
+            <p>Productos probados para uso industrial.</p>
+        </div>
+        <div class="info-card">
+            <h3>Atención Directa</h3>
+            <p>Cotizaciones por WhatsApp en minutos.</p>
+        </div>
+    </section>
 </main>
 
-<footer class="main-footer">
-    <p>&copy; 2026 Grupo Buissa - Cali, Colombia</p>
+<footer class="footer-simple">
+    <p>&copy; 2026 Grupo Buissa | Cali, Colombia</p>
 </footer>
 
 <script src="script.js"></script>
