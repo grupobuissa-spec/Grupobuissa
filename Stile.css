@@ -1,104 +1,301 @@
-/* Estilos generales */
-body {
-  font-family: sans-serif;
-  margin: 0;
+/* -----------------------------------------------------------
+   1. VARIABLES Y RESETEO (Fundamentales para WPO y consistencia)
+   ----------------------------------------------------------- */
+:root {
+  /* Colores de marca optimizados para web */
+  --primary-color: #136699; /* Azul Buissa */
+  --secondary-color: #72BF44; /* Verde Buissa */
+  --text-color: #333333;
+  --light-text: #ffffff;
+  --bg-color: #F5F5F5;
+  --white: #ffffff;
+  --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 15px rgba(0,0,0,0.1);
+  
+  /* Tipografía */
+  --body-font: 'Montserrat', sans-serif;
+  
+  /* Transiciones optimizadas (usando 'transform' y 'opacity' siempre que sea posible) */
+  --transition-fast: 0.3s ease;
+  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Contenedor principal del slider */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden; /* Previene scroll horizontal */
+}
+
+/* Clases de Utilidad */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* -----------------------------------------------------------
+   2. HEADER (Optimizado y Decente)
+   ----------------------------------------------------------- */
+.main-header {
+  background-color: var(--white);
+  padding: 10px 0; /* Más compacto */
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  z-index: 100;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo-link {
+  display: block;
+}
+
+.logo {
+  width: 140px; /* Tamaño optimizado, más estético */
+  height: auto;
+  display: block;
+  /* Mejora la renderización de imágenes */
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.main-nav .menu {
+  list-style: none;
+  display: flex;
+  gap: 25px; /* Más espacio para legibilidad */
+}
+
+.main-nav .menu li a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color var(--transition-fast);
+  padding: 5px 0;
+  position: relative;
+}
+
+.main-nav .menu li a:hover,
+.main-nav .menu li a.active {
+  color: var(--secondary-color);
+}
+
+/* Línea sutil debajo del menú activo */
+.main-nav .menu li a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--secondary-color);
+}
+
+/* -----------------------------------------------------------
+   3. SLIDER HERO (UX y Rendimiento)
+   ----------------------------------------------------------- */
 .slider-container {
   position: relative;
   width: 100%;
+  height: 75vh; /* Altura responsiva (75% de la ventana) */
+  max-height: 650px; /* Límite para pantallas muy grandes */
+  min-height: 400px; /* Límite para pantallas pequeñas */
   overflow: hidden;
+  background-color: #000; /* Fondo para evitar destellos blancos */
 }
 
-/* Contenedor de las diapositivas */
-.slider {
+.slider-track {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  width: 100%; /* El JS manejará el desplazamiento de los hijos */
+  height: 100%;
 }
 
-/* Estilos de cada banner */
 .banner {
-  flex: 0 0 100%;
+  flex: 0 0 100%; /* Cada banner ocupa el 100% del contenedor */
+  width: 100%;
+  height: 100%;
   position: relative;
+  /* Ocultar banners no activos mejora el rendimiento de renderizado */
+  visibility: hidden; 
+  opacity: 0;
+  transition: opacity var(--transition-slow), visibility var(--transition-slow);
+}
+
+/* Solo el banner activo es visible y tiene opacidad completa */
+.banner.active {
+  visibility: visible;
+  opacity: 1;
 }
 
 .banner-img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover; /* Recorte perfecto */
+  filter: brightness(0.65); /* Más contraste para el texto */
   display: block;
 }
 
-.banner-text {
+.banner-content {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Centrado absoluto optimizado */
+  color: var(--light-text);
   text-align: center;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  padding: 20px;
-  border-radius: 5px;
+  z-index: 2;
+  /* Animación de entrada para el texto (UX agradable) */
+  opacity: 0;
+  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
 }
 
-.banner-text h1 {
-  font-size: 2.5rem;
-  margin-top: 0;
+.banner.active .banner-content {
+  opacity: 1;
+  transform: translate(-50%, -50%) translateY(0);
 }
 
-.banner-text p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+.banner-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Mejora legibilidad */
 }
 
+.banner-content p {
+  font-size: 1.25rem;
+  font-weight: 400;
+  max-width: 700px;
+  margin: 0 auto 35px;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
+}
+
+/* Botones Profesionales */
 .btn {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff; /* Color de fondo del botón */
-  color: white;
+  padding: 14px 30px;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 50px; /* Estilo moderno y amigable */
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-/* Botones de navegación */
-.prev, .next {
+.btn-primary {
+  background-color: var(--secondary-color);
+  color: var(--white);
+  box-shadow: 0 4px 15px rgba(114, 191, 68, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-3px); /* Efecto sutil */
+  box-shadow: 0 6px 20px rgba(19, 102, 153, 0.4);
+}
+
+/* Controles del Slider */
+.slider-control {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: var(--white);
   border: none;
-  padding: 15px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   cursor: pointer;
-  border-radius: 5px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast), color var(--transition-fast);
 }
 
-.prev {
-  left: 20px;
+.slider-control:hover {
+  background-color: var(--white);
+  color: var(--primary-color);
 }
 
-.next {
-  right: 20px;
-}
+.slider-control.prev { left: 20px; }
+.slider-control.next { right: 20px; }
 
-/* Puntos indicadores */
+/* Indicadores (Dots) */
 .dots-container {
   position: absolute;
-  bottom: 20px;
+  bottom: 25px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  gap: 12px;
+  z-index: 10;
 }
 
 .dot {
-  width: 15px;
-  height: 15px;
+  width: 12px;
+  height: 12px;
   background-color: rgba(255, 255, 255, 0.5);
+  border: none;
   border-radius: 50%;
-  margin: 0 10px;
   cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .dot.active {
-  background-color: white;
+  background-color: var(--white);
+  transform: scale(1.2); /* Efecto sutil */
+}
+
+/* -----------------------------------------------------------
+   4. FOOTER (Optimizado)
+   ----------------------------------------------------------- */
+.main-footer {
+  text-align: center;
+  padding: 30px 0;
+  background-color: var(--primary-color);
+  color: var(--white);
+  margin-top: auto; /* Para layouts de página completa */
+  font-size: 0.9rem;
+}
+
+/* -----------------------------------------------------------
+   5. MEDIA QUERIES (Responsive Design)
+   ----------------------------------------------------------- */
+@media (max-width: 992px) {
+  .banner-content h1 { font-size: 2.5rem; }
+  .banner-content p { font-size: 1.1rem; }
+}
+
+@media (max-width: 768px) {
+  .header-container { flex-direction: column; padding: 10px 0; }
+  .logo { width: 110px; margin-bottom: 10px; } /* Logo aún más pequeño en móvil */
+  .main-nav .menu { gap: 15px; font-size: 0.85rem; }
+  
+  .slider-container { height: 60vh; min-height: 350px; }
+  .banner-content h1 { font-size: 2rem; margin-bottom: 10px; }
+  .banner-content p { font-size: 1rem; margin-bottom: 25px; }
+  .btn { padding: 12px 25px; font-size: 0.85rem; }
+  
+  .slider-control { width: 40px; height: 40px; font-size: 1.5rem; }
+  .slider-control.prev { left: 10px; }
+  .slider-control.next { right: 10px; }
+  .dots-container { bottom: 15px; gap: 8px; }
+  .dot { width: 10px; height: 10px; }
 }
