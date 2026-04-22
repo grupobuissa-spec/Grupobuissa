@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Grupo Buissa | Inicio</title>
-  <link rel="stylesheet" href="Stile.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo Buissa | Inicio</title>
+    <link rel="stylesheet" href="Stile.css">
 </head>
 <body>
 
-  <header class="main-header">
-    <div class="container header-container">
-      <a href="index.html">
-        <img src="assets/logo.png" alt="Logo" class="logo">
-      </a>
-      <nav class="main-nav">
-        <ul class="menu">
-          <li><a href="index.html" class="active">Inicio</a></li>
-          <li><a href="Cotizacion.html">Cotización</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="slider-container">
-      <div class="slider-track" id="sliderTrack">
-        <article class="banner active">
-          <img src="assets/banner-aliado.png" alt="Alianza" class="banner-img">
-          <div class="banner-content">
-            <h1>Tu aliado estratégico</h1>
-            <p>Confianza y resultados para tu negocio.</p>
-            <a href="Cotizacion.html" class="btn btn-primary">Cotizar ahora</a>
-          </div>
-        </article>
-        </div>
-      
-      <button class="slider-control prev" id="prevBtn">❮</button>
-      <button class="slider-control next" id="nextBtn">❯</button>
-      
-      <div class="dots-container" id="dotsContainer">
-        <button class="dot active" data-index="0"></button>
-        <button class="dot" data-index="1"></button>
-        <button class="dot" data-index="2"></button>
-      </div>
-    </section>
-  </main>
-
-  <footer class="main-footer" id="contacto">
+<header class="main-header">
     <div class="container">
-      <p>© 2026 Grupo Buissa | Cali, Colombia</p>
+        <img src="assets/logo.png" alt="Logo" class="logo">
+        <nav>
+            <ul class="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="Cotizacion.html">Cotización</a></li>
+            </ul>
+        </nav>
     </div>
-  </footer>
+</header>
 
-  <script src="script.js"></script>
+<main>
+    <section class="slider-container">
+        <div class="slider-track" id="sliderTrack">
+            <div class="banner">
+                <img src="assets/banner-aliado.png" class="banner-img">
+                <div class="banner-content">
+                    <h1>Tu aliado estratégico</h1>
+                    <p>Confianza y cercanía para tu negocio.</p>
+                </div>
+            </div>
+            <div class="banner">
+                <img src="assets/banner-soluciones.png" class="banner-img">
+                <div class="banner-content">
+                    <h1>Soluciones a tu medida</h1>
+                    <p>Innovación constante en logística.</p>
+                </div>
+            </div>
+        </div>
+        <button class="slider-control prev" id="prevBtn">❮</button>
+        <button class="slider-control next" id="nextBtn">❯</button>
+    </section>
+
+    <div style="height: 500px; display: flex; align-items: center; justify-content: center;">
+        <h2>Bienvenidos a Grupo Buissa</h2>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <p>&copy; 2026 Grupo Buissa - Cali, Colombia</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
