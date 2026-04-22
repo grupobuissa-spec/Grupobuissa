@@ -46,7 +46,7 @@
         e.preventDefault();
 
         // SEO/UX: Configuración de contacto
-        const telefono = "573001234567"; // Número verificado de Grupo Buissa
+        const telefono = "573508967475"; // Número verificado de Grupo Buissa
         const nombre = document.getElementById('nombre').value;
         const email = document.getElementById('email').value;
         const fecha = document.getElementById('fecha').value;
