@@ -1,301 +1,208 @@
 /* -----------------------------------------------------------
-   1. VARIABLES Y RESETEO (Fundamentales para WPO y consistencia)
+   1. VARIABLES, RESETEO Y WPO (Fundamentales)
    ----------------------------------------------------------- */
 :root {
-  /* Colores de marca optimizados para web */
+  /* Colores de marca optimizados para contraste web (WCAG) */
   --primary-color: #136699; /* Azul Buissa */
   --secondary-color: #72BF44; /* Verde Buissa */
   --text-color: #333333;
   --light-text: #ffffff;
-  --bg-color: #F5F5F5;
+  --bg-color: #F8F9FA;
   --white: #ffffff;
+  
+  /* Sombras suaves para UX 'Premium' */
   --shadow-sm: 0 2px 5px rgba(0,0,0,0.05);
   --shadow-md: 0 4px 15px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.15);
   
   /* Tipografía */
   --body-font: 'Montserrat', sans-serif;
   
-  /* Transiciones optimizadas (usando 'transform' y 'opacity' siempre que sea posible) */
+  /* Transiciones optimizadas para WPO (transform/opacity) */
   --transition-fast: 0.3s ease;
-  --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: var(--body-font);
   background-color: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
-  overflow-x: hidden; /* Previene scroll horizontal */
+  overflow-x: hidden; /* Previene scroll horizontal accidental */
+  display: flex; flex-direction: column; min-height: 100vh;
 }
 
 /* Clases de Utilidad */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
+.container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+.margin-top-md { margin-top: 25px; }
 
 /* -----------------------------------------------------------
-   2. HEADER (Optimizado y Decente)
+   2. HEADER (Optimizado y Profesional)
    ----------------------------------------------------------- */
 .main-header {
   background-color: var(--white);
-  padding: 10px 0; /* Más compacto */
+  padding: 12px 0; /* Más compacto y elegante */
   box-shadow: var(--shadow-sm);
-  position: relative;
-  z-index: 100;
+  position: relative; z-index: 100;
 }
 
-.header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo-link {
-  display: block;
-}
+.header-container { display: flex; justify-content: space-between; align-items: center; }
+.logo-link { display: block; }
 
 .logo {
-  width: 140px; /* Tamaño optimizado, más estético */
-  height: auto;
-  display: block;
-  /* Mejora la renderización de imágenes */
-  image-rendering: -webkit-optimize-contrast;
+  width: 140px; /* Tamaño optimizado y estético */
+  height: auto; display: block;
+  image-rendering: -webkit-optimize-contrast; /* Mejora nitidez */
 }
 
-.main-nav .menu {
-  list-style: none;
-  display: flex;
-  gap: 25px; /* Más espacio para legibilidad */
-}
+.main-nav .menu { list-style: none; display: flex; gap: 25px; }
 
 .main-nav .menu li a {
   text-decoration: none;
   color: var(--primary-color);
-  font-weight: 600;
-  font-size: 0.95rem;
+  font-weight: 600; font-size: 0.95rem;
   transition: color var(--transition-fast);
-  padding: 5px 0;
-  position: relative;
+  padding: 5px 0; position: relative;
 }
 
 .main-nav .menu li a:hover,
-.main-nav .menu li a.active {
-  color: var(--secondary-color);
-}
+.main-nav .menu li a.active { color: var(--secondary-color); }
 
-/* Línea sutil debajo del menú activo */
+/* Línea sutil de menú activo */
 .main-nav .menu li a.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--secondary-color);
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 100%; height: 2px; background-color: var(--secondary-color);
 }
 
 /* -----------------------------------------------------------
-   3. SLIDER HERO (UX y Rendimiento)
+   3. SLIDER HERO (UX Llamativo e Integrado)
    ----------------------------------------------------------- */
 .slider-container {
-  position: relative;
-  width: 100%;
-  height: 75vh; /* Altura responsiva (75% de la ventana) */
-  max-height: 650px; /* Límite para pantallas muy grandes */
-  min-height: 400px; /* Límite para pantallas pequeñas */
-  overflow: hidden;
-  background-color: #000; /* Fondo para evitar destellos blancos */
+  position: relative; width: 100%;
+  height: 70vh; /* Altura controlada, no invasiva */
+  max-height: 600px; min-height: 400px;
+  overflow: hidden; background-color: #000;
 }
 
 .slider-track {
-  display: flex;
-  width: 100%; /* El JS manejará el desplazamiento de los hijos */
-  height: 100%;
+  display: flex; width: 100%;
+  transition: transform var(--transition-slow);
 }
 
-.banner {
-  flex: 0 0 100%; /* Cada banner ocupa el 100% del contenedor */
-  width: 100%;
-  height: 100%;
-  position: relative;
-  /* Ocultar banners no activos mejora el rendimiento de renderizado */
-  visibility: hidden; 
-  opacity: 0;
-  transition: opacity var(--transition-slow), visibility var(--transition-slow);
-}
+.banner { flex: 0 0 100%; width: 100%; height: 100%; position: relative; visibility: hidden; opacity: 0; transition: opacity var(--transition-slow), visibility var(--transition-slow); }
+.banner.active { visibility: visible; opacity: 1; }
 
-/* Solo el banner activo es visible y tiene opacidad completa */
-.banner.active {
-  visibility: visible;
-  opacity: 1;
-}
-
-.banner-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Recorte perfecto */
-  filter: brightness(0.65); /* Más contraste para el texto */
-  display: block;
-}
+.banner-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); display: block; }
 
 .banner-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Centrado absoluto optimizado */
-  color: var(--light-text);
-  text-align: center;
-  z-index: 2;
-  /* Animación de entrada para el texto (UX agradable) */
-  opacity: 0;
-  transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%) translateY(20px); /* Efecto de entrada */
+  color: var(--light-text); text-align: center; z-index: 2;
+  width: 85%; max-width: 900px;
+  opacity: 0; transition: opacity 0.5s ease 0.3s, transform 0.5s ease 0.3s;
 }
 
-.banner.active .banner-content {
-  opacity: 1;
-  transform: translate(-50%, -50%) translateY(0);
-}
+.banner.active .banner-content { opacity: 1; transform: translate(-50%, -50%) translateY(0); }
 
-.banner-content h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 15px;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Mejora legibilidad */
-}
+.banner-content h1 { font-size: 3.2rem; font-weight: 700; line-height: 1.2; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+.banner-content p { font-size: 1.3rem; font-weight: 400; max-width: 700px; margin: 0 auto 35px; text-shadow: 0 1px 5px rgba(0,0,0,0.5); }
 
-.banner-content p {
-  font-size: 1.25rem;
-  font-weight: 400;
-  max-width: 700px;
-  margin: 0 auto 35px;
-  text-shadow: 0 1px 5px rgba(0,0,0,0.5);
-}
-
-/* Botones Profesionales */
+/* -----------------------------------------------------------
+   4. BOTONES Y FORMULARIOS (UX E-commerce)
+   ----------------------------------------------------------- */
 .btn {
-  display: inline-block;
-  padding: 14px 30px;
-  text-decoration: none;
-  border-radius: 50px; /* Estilo moderno y amigable */
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  display: inline-block; padding: 14px 30px;
+  text-decoration: none; border-radius: 50px; /* Moderno */
+  font-weight: 700; font-size: 0.95rem; text-transform: uppercase;
+  letter-spacing: 1px; border: none; cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
 .btn-primary {
-  background-color: var(--secondary-color);
-  color: var(--white);
+  background-color: var(--secondary-color); color: var(--white);
   box-shadow: 0 4px 15px rgba(114, 191, 68, 0.3);
 }
 
 .btn-primary:hover {
   background-color: var(--primary-color);
-  transform: translateY(-3px); /* Efecto sutil */
+  transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(19, 102, 153, 0.4);
 }
 
-/* Controles del Slider */
+.btn-secondary {
+  background-color: transparent; color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.btn-secondary:hover { background-color: var(--primary-color); color: var(--white); }
+.btn-sm { padding: 8px 15px; font-size: 0.8rem; }
+.btn-block { width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px; }
+
+/* Controles Slider */
 .slider-control {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.3);
-  color: var(--white);
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: none; color: rgba(255, 255, 255, 0.7);
+  font-size: 2.5rem; cursor: pointer; z-index: 10;
+  transition: color var(--transition-fast); padding: 10px;
 }
+.slider-control:hover { color: white; }
+.prev { left: 20px; } .next { right: 20px; }
 
-.slider-control:hover {
-  background-color: var(--white);
-  color: var(--primary-color);
-}
-
-.slider-control.prev { left: 20px; }
-.slider-control.next { right: 20px; }
-
-/* Indicadores (Dots) */
-.dots-container {
-  position: absolute;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 12px;
-  z-index: 10;
-}
-
-.dot {
-  width: 12px;
-  height: 12px;
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color var(--transition-fast), transform var(--transition-fast);
-}
-
-.dot:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
-
-.dot.active {
-  background-color: var(--white);
-  transform: scale(1.2); /* Efecto sutil */
-}
+/* Dots */
+.dots-container { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 10; }
+.dot { width: 12px; height: 12px; background-color: rgba(255, 255, 255, 0.4); border: none; border-radius: 50%; cursor: pointer; transition: background-color var(--transition-fast), transform var(--transition-fast); }
+.dot:hover { background-color: rgba(255, 255, 255, 0.8); }
+.dot.active { background-color: white; transform: scale(1.2); }
 
 /* -----------------------------------------------------------
-   4. FOOTER (Optimizado)
+   5. SECCIÓN COTIZACIÓN (Formulario Profesional)
    ----------------------------------------------------------- */
-.main-footer {
-  text-align: center;
-  padding: 30px 0;
-  background-color: var(--primary-color);
-  color: var(--white);
-  margin-top: auto; /* Para layouts de página completa */
-  font-size: 0.9rem;
+.page-content { padding: 60px 0; flex: 1; }
+.cotizacion-section { max-width: 800px; margin: 0 auto; background: var(--white); padding: 40px; border-radius: 12px; box-shadow: var(--shadow-md); }
+.cotizacion-section h1 { text-align: center; color: var(--primary-color); font-size: 2.8rem; margin-bottom: 10px; }
+.section-subtitle { text-align: center; color: var(--text-color); margin-bottom: 40px; font-size: 1.1rem; }
+
+.contact-form .form-group { margin-bottom: 20px; }
+.contact-form label { display: block; font-weight: 600; color: var(--primary-color); margin-bottom: 8px; font-size: 0.95rem; }
+.contact-form input, .contact-form select, .contact-form textarea {
+  width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 6px;
+  font-family: var(--body-font); font-size: 1rem; transition: border-color var(--transition-fast);
 }
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { border-color: var(--secondary-color); outline: none; box-shadow: 0 0 0 3px rgba(114, 191, 68, 0.1); }
+
+.producto-row { display: grid; grid-template-columns: 1fr 100px; gap: 15px; margin-bottom: 10px; }
+.icon-whatsapp { color: #25D366; }
 
 /* -----------------------------------------------------------
-   5. MEDIA QUERIES (Responsive Design)
+   6. FOOTER (Optimizado)
+   ----------------------------------------------------------- */
+.main-footer { text-align: center; padding: 25px 0; background-color: var(--primary-color); color: var(--white); margin-top: auto; font-size: 0.9rem; }
+
+/* -----------------------------------------------------------
+   7. MEDIA QUERIES (Responsive Design Mobile-First)
    ----------------------------------------------------------- */
 @media (max-width: 992px) {
-  .banner-content h1 { font-size: 2.5rem; }
-  .banner-content p { font-size: 1.1rem; }
+  .banner-content h1 { font-size: 2.8rem; }
+  .cotizacion-section h1 { font-size: 2.4rem; }
 }
 
 @media (max-width: 768px) {
   .header-container { flex-direction: column; padding: 10px 0; }
-  .logo { width: 110px; margin-bottom: 10px; } /* Logo aún más pequeño en móvil */
+  .logo { width: 110px; margin-bottom: 10px; }
   .main-nav .menu { gap: 15px; font-size: 0.85rem; }
   
   .slider-container { height: 60vh; min-height: 350px; }
-  .banner-content h1 { font-size: 2rem; margin-bottom: 10px; }
-  .banner-content p { font-size: 1rem; margin-bottom: 25px; }
-  .btn { padding: 12px 25px; font-size: 0.85rem; }
+  .banner-content h1 { font-size: 2.2rem; margin-bottom: 10px; }
+  .banner-content p { font-size: 1.1rem; margin-bottom: 25px; }
+  .btn { padding: 12px 25px; font-size: 0.9rem; }
   
-  .slider-control { width: 40px; height: 40px; font-size: 1.5rem; }
-  .slider-control.prev { left: 10px; }
-  .slider-control.next { right: 10px; }
-  .dots-container { bottom: 15px; gap: 8px; }
-  .dot { width: 10px; height: 10px; }
+  .slider-control { font-size: 2rem; }
+  .prev { left: 10px; } .next { right: 10px; }
+  .dots-container { bottom: 15px; gap: 8px; } .dot { width: 10px; height: 10px; }
+  
+  .cotizacion-section { padding: 25px; }
+  .cotizacion-section h1 { font-size: 2rem; }
+  .producto-row { grid-template-columns: 1fr; gap: 10px; }
 }
