@@ -3,16 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Slider de Banners</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Grupo Buissa | Inicio</title>
+  <link rel="stylesheet" href="Stile.css">
 </head>
 <body>
 
-  <div class="slider-container">
-    <div class="slider">
+  <header class="header">
+    <img src="assets/logo.png" alt="Logo Grupo Buissa" class="logo">
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="Cotizacion.html">Cotización</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="slider-container">
+    <div class="slider-track" id="sliderTrack">
+      
       <section class="banner active">
-        <img src="assets/banner-aliado.png" alt="Tu aliado en cada decisión" class="banner-img">
-        <div class="banner-text">
+        <img src="assets/banner-aliado.png" alt="Tu aliado" class="banner-img">
+        <div class="banner-content">
           <h1>Tu aliado en cada decisión</h1>
           <p>Confianza y cercanía para tu negocio</p>
           <a href="cotizacion.html" class="btn">Solicita tu cotización</a>
@@ -20,8 +32,8 @@
       </section>
 
       <section class="banner">
-        <img src="assets/banner-soluciones.png" alt="Soluciones a tu medida" class="banner-img">
-        <div class="banner-text">
+        <img src="assets/banner-soluciones.png" alt="Soluciones" class="banner-img">
+        <div class="banner-content">
           <h1>Soluciones a tu medida</h1>
           <p>Nos adaptamos a tus necesidades</p>
           <a href="cotizacion.html" class="btn">Habla con un asesor</a>
@@ -29,24 +41,28 @@
       </section>
 
       <section class="banner">
-        <img src="assets/banner.png" alt="Asesoría y confianza" class="banner-img">
-        <div class="banner-text">
+        <img src="assets/banner.png" alt="Asesoría" class="banner-img">
+        <div class="banner-content">
           <h1>Asesoría y confianza</h1>
           <p>Apoyo y compromiso en cada paso</p>
           <a href="cotizacion.html" class="btn">Solicita tu consulta</a>
         </div>
-      </section> 
+      </section>
     </div>
 
-    <button class="prev" onclick="prevSlide()">&#10094;</button>
-    <button class="next" onclick="nextSlide()">&#10095;</button>
+    <button class="control prev" id="prevBtn">&#10094;</button>
+    <button class="control next" id="nextBtn">&#10095;</button>
 
-    <div class="dots-container">
-      <span class="dot active" onclick="currentSlide(1)"></span>
-      <span class="dot" onclick="currentSlide(2)"></span>
-      <span class="dot" onclick="currentSlide(3)"></span>
+    <div class="dots-container" id="dotsContainer">
+      <span class="dot active" data-index="0"></span>
+      <span class="dot" data-index="1"></span>
+      <span class="dot" data-index="2"></span>
     </div>
-  </div>
+  </main>
+
+  <footer class="footer" id="contacto">
+    <p>© 2026 Grupo Buissa | Asesoría y Soluciones a tu Medida</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
