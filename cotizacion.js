@@ -1,81 +1,43 @@
-/* -----------------------------------------------------------
-   GRUPO BUISSA - COTIZACIÓN SCRIPT (Optimizado y Funcional)
-   ----------------------------------------------------------- */
-
-(function() {
-  document.addEventListener('DOMContentLoaded', initCotizacion);
-
-  function initCotizacion() {
+document.addEventListener('DOMContentLoaded', () => {
     const dynamicForm = document.getElementById('dynamicForm');
     const addProductBtn = document.getElementById('addProduct');
-    const productosContainer = document.getElementById('productosContainer');
+    const container = document.getElementById('productosContainer');
 
-    // --- GESTIÓN DINÁMICA DE PRODUCTOS (UX) ---
-
-    if (addProductBtn && productosContainer) {
-      addProductBtn.addEventListener('click', () => {
-        const div = document.createElement('div');
-        div.classList.add('producto-row', 'margin-top-sm');
-        
-        // HTML optimizado para accesibilidad
-        div.innerHTML = `
-          <select name="producto[]" required aria-label="Seleccionar producto">
-            <option value="" disabled selected>Seleccione un producto...</option>
-            <option value="Cartón de embalaje (1,20m x 100m)">Cartón de embalaje (1,20m x 100m)</option>
-            <option value="Sogas en polipropileno (Ganadera Mix)">Sogas en polipropileno (Ganadera Mix)</option>
-            <option value="Guantes industriales">Guantes industriales</option>
-            <option value="Plásticos y empaques">Plásticos y empaques</option>
-            <option value="Otros">Otros</option>
-          </select>
-          <input type="number" name="cantidad[]" placeholder="Cant." min="1" required aria-label="Cantidad">
-          <button type="button" class="btn-remove btn-sm" aria-label="Eliminar producto">✖</button>
+    // Agregar filas de productos
+    addProductBtn.addEventListener('click', () => {
+        const row = document.createElement('div');
+        row.className = 'producto-row';
+        row.innerHTML = `
+            <select name="producto[]" required>
+                <option value="Cartón Corrugado">Cartón Corrugado</option>
+                <option value="Soga Polipropileno">Soga Polipropileno</option>
+                <option value="Guantes de Nitrilo">Guantes de Nitrilo</option>
+                <option value="Cinta de Embalaje">Cinta de Embalaje</option>
+            </select>
+            <input type="number" name="cantidad[]" placeholder="Cant." min="1" required>
         `;
-        productosContainer.appendChild(div);
+        container.appendChild(row);
+    });
 
-        // Añadir evento para eliminar la fila recién creada
-        div.querySelector('.btn-remove').addEventListener('click', () => {
-          div.remove();
-        });
-      });
-    }
-
-    // --- ENVÍO A WHATSAPP (Lógica Funcional) ---
-
-    if (dynamicForm) {
-      dynamicForm.addEventListener('submit', (e) => {
+    // Enviar a WhatsApp
+    dynamicForm.addEventListener('submit', (e) => {
         e.preventDefault();
-
-        // SEO/UX: Configuración de contacto
-        const telefono = "573508967475"; // Número verificado de Grupo Buissa
+        
+        const telefono = "573155167475"; // Tu número
         const nombre = document.getElementById('nombre').value;
-        const email = document.getElementById('email').value;
-        const fecha = document.getElementById('fecha').value;
-        const mensaje = document.getElementById('mensaje').value;
-        const origen = dynamicForm.querySelector('[name="origen"]').value;
+        const mensajeExtra = document.getElementById('mensaje').value;
+        
+        let productosTexto = "";
+        const productos = document.querySelectorAll('[name="producto[]"]');
+        const cantidades = document.querySelectorAll('[name="cantidad[]"]');
 
-        // Captura y formato eficiente de productos dinámicos
-        let productos = "";
-        const productoElems = dynamicForm.querySelectorAll('[name="producto[]"]');
-        const cantidadElems = dynamicForm.querySelectorAll('[name="cantidad[]"]');
-
-        productoElems.forEach((elem, i) => {
-          const prod = elem.value;
-          const cant = cantidadElems[i].value;
-          // Solo añadir productos válidos
-          if (prod && cant && cant > 0) {
-            productos += `\n✅ ${prod} (Cantidad: ${cant})`;
-          }
+        productos.forEach((p, i) => {
+            if(p.value) productosTexto += `%0A- ${p.value} (${cantidades[i].value} unidades)`;
         });
 
-        // SEO/UX: Mensaje descriptivo y profesional
-        const texto = `Hola *Grupo Buissa*, soy *${nombre}*.\nMi correo es: ${email}.\n\nQuiero cotizar los siguientes productos:${productos}\n\n📅 *Fecha entrega:* ${fecha}\nDetalles adicionales: ${mensaje}\n\n_Origen: ${origen}_`;
-
-        // SEO: Uso de wa.me optimizado con codificación URL segura
-        const url = `https://wa.me/${telefono}?text=${encodeURIComponent(texto)}`;
+        const textoFinal = `*Nueva Cotización - Grupo Buissa*%0A%0A*Cliente:* ${nombre}${productosTexto}%0A%0A*Notas:* ${mensajeExtra}`;
         
-        // UX: Abrir en pestaña nueva para no perder al usuario
-        window.open(url, "_blank");
-      });
-    }
-  }
-})();
+        const url = `https://wa.me/${telefono}?text=${textoFinal}`;
+        window.open(url, '_blank');
+    });
+});

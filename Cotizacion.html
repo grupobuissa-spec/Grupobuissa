@@ -1,93 +1,79 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cotizar Productos y Servicios Online | Grupo Buissa</title>
-  <meta name="description" content="Solicita tu cotización personalizada de cartón, sogas, guantes y empaques industriales. Envío rápido por WhatsApp.">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="Stile.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizar Productos | Grupo Buissa - Suministros Industriales</title>
+    <meta name="description" content="Solicita tu cotización de cartón, sogas y guantes industriales. Respuesta inmediata vía WhatsApp.">
+    <link rel="stylesheet" href="Stile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header class="main-header">
-    <div class="container header-container">
-      <a href="index.html" class="logo-link">
-        <img src="assets/logo.png" alt="Logo Grupo Buissa" class="logo" width="160" height="auto">
-      </a>
-      <nav class="main-nav" aria-label="Navegación principal">
-        <ul class="menu">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="Cotizacion.html" class="active">Cotización</a></li>
-          <li><a href="#contacto">Contacto</a></li>
-        </ul>
-      </nav>
+<header class="main-header">
+    <div class="nav-container">
+        <a href="index.html" class="logo-box">
+            <img src="assets/logo.png" alt="Grupo Buissa Logo" class="logo-img">
+        </a>
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="Cotizacion.html" class="active">Productos</a></li>
+                <li><a href="Cotizacion.html" class="btn-nav">WhatsApp</a></li>
+            </ul>
+        </nav>
     </div>
-  </header>
+</header>
 
-  <main class="container page-content">
-    <section class="cotizacion-section">
-      <h1>Solicita tu cotización personalizada</h1>
-      <p class="section-subtitle">Completa el formulario y recibe una propuesta por WhatsApp en minutos.</p>
-      
-      <form id="dynamicForm" class="contact-form">
-        <input type="hidden" name="origen" value="web_cotizacion_page">
-
-        <div class="form-group">
-          <label for="nombre">Nombre Completo:</label>
-          <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
+<main class="container">
+    <section class="form-section">
+        <div class="form-header">
+            <h1>Cotización de Productos</h1>
+            <p>Selecciona los suministros que necesitas y recibe el presupuesto en tu WhatsApp.</p>
         </div>
 
-        <div class="form-group">
-          <label for="email">Correo Electrónico Empresarial:</label>
-          <input type="email" id="email" name="email" placeholder="juan@empresa.com" required>
-        </div>
+        <form id="dynamicForm" class="quote-form">
+            <div class="form-group">
+                <label for="nombre">Nombre Completo</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
+            </div>
 
-        <div id="productosContainer" class="form-group productos-group">
-          <label>Selecciona tus Productos:</label>
-          <div class="producto-row">
-            <select name="producto[]" required aria-label="Seleccionar producto">
-              <option value="" disabled selected>Seleccione un producto...</option>
-              <option value="Cartón de embalaje (1,20m x 100m)">Cartón de embalaje (1,20m x 100m)</option>
-              <option value="Sogas en polipropileno (Ganadera Mix)">Sogas en polipropileno (Ganadera Mix)</option>
-              <option value="Guantes industriales">Guantes industriales</option>
-              <option value="Plásticos y empaques">Plásticos y empaques</option>
-              <option value="Otros">Otros</option>
-            </select>
-            <input type="number" name="cantidad[]" placeholder="Cant." min="1" required aria-label="Cantidad">
-          </div>
-        </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico</label>
+                <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+            </div>
 
-        <button type="button" id="addProduct" class="btn-secondary btn-sm">➕ Agregar otro producto</button>
+            <div id="productosContainer" class="products-list">
+                <label>Productos a Cotizar</label>
+                <div class="producto-row">
+                    <select name="producto[]" required>
+                        <option value="" disabled selected>Elegir producto...</option>
+                        <option value="Cartón Corrugado">Cartón Corrugado</option>
+                        <option value="Soga Polipropileno">Soga Polipropileno</option>
+                        <option value="Guantes de Nitrilo">Guantes de Nitrilo</option>
+                        <option value="Cinta de Embalaje">Cinta de Embalaje</option>
+                    </select>
+                    <input type="number" name="cantidad[]" placeholder="Cant." min="1" required>
+                </div>
+            </div>
 
-        <div class="form-group margin-top-md">
-          <label for="fecha">Fecha de entrega deseada:</label>
-          <input type="date" id="fecha" name="fecha" required>
-        </div>
+            <button type="button" id="addProduct" class="btn-secondary">+ Agregar otro producto</button>
 
-        <div class="form-group">
-          <label for="mensaje">Detalles adicionales o requerimientos especiales:</label>
-          <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe aquí tus dudas..."></textarea>
-        </div>
+            <div class="form-group margin-top">
+                <label for="mensaje">Notas adicionales (Medidas, color, etc.)</label>
+                <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe aquí los detalles..."></textarea>
+            </div>
 
-        <button type="submit" class="btn btn-primary btn-block">
-          <svg viewBox="0 0 24 24" width="20" height="20" class="icon-whatsapp"><path fill="currentColor" d="M12.031 6.172c-2.315 0-4.328 1.411-5.188 3.396-.442 1.021-.523 2.124-.23 3.133L5.03 16.5l3.876-1.011c1.022.38 2.125.461 3.134.168 2.315-.693 3.969-2.73 3.969-5.111.001-2.315-1.652-4.374-3.978-4.374zm3.969 5.111c0 1.93-1.341 3.587-3.134 4.149a4.887 4.887 0 01-2.541-.131L8.52 15.6l.825-2.613a4.877 4.877 0 01-.186-2.532c.693-1.61 2.315-2.73 3.969-2.73 1.93 0 3.513 1.636 3.513 3.567zM12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/></svg>
-          Enviar por WhatsApp
-        </button>
-      </form>
+            <input type="hidden" name="origen" value="Web_Cotizacion">
+            <button type="submit" class="btn-submit">Enviar Cotización por WhatsApp</button>
+        </form>
     </section>
-  </main>
+</main>
 
-  <footer class="main-footer" id="contacto">
-    <div class="container">
-      <p>© 2026 Grupo Buissa | Asesoría y Soluciones a tu Medida. Cali, Colombia.</p>
-    </div>
-  </footer>
+<footer class="footer-simple">
+    <p>&copy; 2026 Grupo Buissa | Cali, Colombia</p>
+</footer>
 
-  <script src="cotizacion.js" defer></script>
+<script src="cotizacion.js"></script>
 </body>
 </html>
