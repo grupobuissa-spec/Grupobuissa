@@ -1,47 +1,32 @@
+/* Estilos generales */
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: sans-serif;
   margin: 0;
-  background-color: #F5F5F5;
-  color: #333;
 }
 
-.header {
-  text-align: center;
-  padding: 20px;
-  background-color: #ffffff;
-}
-
-.logo {
-  width: 200px;
-}
-
-.menu {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.menu li a {
-  text-decoration: none;
-  color: #136699;
-  font-weight: bold;
-}
-
-.banner {
+/* Contenedor principal del slider */
+.slider-container {
   position: relative;
-  text-align: center;
-  margin-bottom: 40px;
+  width: 100%;
   overflow: hidden;
-  border-radius: 8px;
+}
+
+/* Contenedor de las diapositivas */
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Estilos de cada banner */
+.banner {
+  flex: 0 0 100%;
+  position: relative;
 }
 
 .banner-img {
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.6s ease, filter 0.6s ease;
 }
 
 .banner-text {
@@ -49,5 +34,71 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  text-align: center;
   color: white;
-  text-shadow: 1px 1px 4
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.banner-text h1 {
+  font-size: 2.5rem;
+  margin-top: 0;
+}
+
+.banner-text p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Color de fondo del botón */
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+/* Botones de navegación */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+/* Puntos indicadores */
+.dots-container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: white;
+}
